@@ -109,6 +109,16 @@ class LERFModel(NerfactoModel):
                         n_phrases_sims[j] = pos_prob
         return torch.stack(n_phrases_sims), torch.Tensor(n_phrases_maxs)
 
+    # def get_outputs_specifics(self, batch_positions):
+    #     clip_scales_min = 0.05
+    #     clip_scales_max = 0.5
+    #     linspace_array = np.linspace(clip_scales_min, clip_scales_max, 7)
+
+    #     for clip_scale in linspace_array:
+    #         lerf_field_outputs = self.lerf_field.get_outputs_specifics(batch_positions, clip_scale)
+
+    #     return lerf_field_outputs
+
     def get_outputs(self, ray_bundle: RayBundle):
         ray_samples, weights_list, ray_samples_list = self.proposal_sampler(ray_bundle, density_fns=self.density_fns)
         ray_samples_list.append(ray_samples)
